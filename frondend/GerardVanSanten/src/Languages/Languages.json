@@ -1,0 +1,48 @@
+{
+  "locales": ["en", "nl"],
+  "en": {
+    "nav": { "home": "Home", "about": "About", "contact": "Contact", "search": "Search..." },
+    "hero": {
+      "title": "Gerard Van Santen",
+      "subtitle": "Artist in Hilverus",
+      "viewWorks": "View Works",
+      "contact": "Contact"
+    },
+    "featured": {
+      "heading": "Featured",
+      "intro": "My recent works"
+    },
+    "artworks": {
+      "1": { "src": "maan.jpg", "title": "Artwork 1", "desc": "Short description of artwork 1." },
+      "2": {
+        "src": "Scapandre.jpg",
+        "title": "Artwork 2",
+        "desc": "Short description of artwork 2."
+      },
+      "3": { "src": "kroon.jpg", "title": "Artwork 3", "desc": "Short description of artwork 3." }
+    },
+    "footer": { "copyright": "© {year} Gerard Van Santen", "madeBy": "made by Merlijn Bijenveld" }
+  },
+  "nl": {
+    "nav": { "home": "Home", "about": "Over", "contact": "Contact", "search": "Zoeken..." },
+    "hero": {
+      "title": "Gerard Van Santen",
+      "subtitle": "Artiest uit hilversum",
+      "viewWorks": "Bekijk werken",
+      "contact": "Contact"
+    },
+    "featured": {
+      "heading": "Uitgelicht",
+      "intro": "Mijn recente werken"
+    },
+    "artworks": {
+      "1": { "src": "maan.jpg", "title": "Werk 1", "desc": "Korte beschrijving van werk 1." },
+      "2": { "src": "Scapandre.jpg", "title": "Werk 2", "desc": "Korte beschrijving van werk 2." },
+      "3": { "src": "kroon.jpg", "title": "Werk 3", "desc": "Korte beschrijving van werk 3." }
+    },
+    "footer": {
+      "copyright": "© {year} Gerard Van Santen",
+      "madeBy": "gemaakt door Merlijn Bijenveld"
+    }
+  }
+}
