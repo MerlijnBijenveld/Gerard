@@ -1,5 +1,5 @@
 <script setup>
-import { useLan } from './Languages/LanguagesManager'
+import { useLan } from '../Languages/LanguagesManager'
 const year = new Date().getFullYear()
 const { t } = useLan()
 </script>

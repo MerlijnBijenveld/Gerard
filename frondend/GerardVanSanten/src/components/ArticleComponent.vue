@@ -1,0 +1,185 @@
+<script setup>
+import { ref } from 'vue'
+
+defineProps({
+  articles: {
+    type: Array,
+    default: () => [],
+  },
+})
+
+// modal viewer for image zoom
+const selectedImage = ref(null)
+function openImage(src) {
+  selectedImage.value = src
+  document.body.style.overflow = 'hidden'
+}
+function closeImage() {
+  selectedImage.value = null
+  document.body.style.overflow = ''
+}
+</script>
+
+<template>
+  <section class="article-list">
+    <article
+      v-for="(a, i) in articles"
+      :key="a.id || i"
+      :class="['article', i % 2 ? 'reverse' : '']"
+    >
+      <div class="article-image" v-if="a.image">
+        <img
+          class="article-img"
+          :src="a.image"
+          :alt="a.title"
+          @click="openImage(a.image)"
+          @contextmenu.prevent
+          @dragstart.prevent
+        />
+      </div>
+
+      <div class="article-content">
+        <h3 class="article-title">{{ a.title }}</h3>
+        <div class="article-date">{{ a.date }}</div>
+        <p class="article-description">{{ a.description }}</p>
+      </div>
+    </article>
+
+    <!-- modal image viewer -->
+    <div v-if="selectedImage" class="image-viewer" @click="closeImage">
+      <img :src="selectedImage" class="viewer-img" alt="Expanded view" />
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.article {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 2rem;
+  transition: background 0.3s ease;
+}
+
+.article:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.article.reverse {
+  flex-direction: row-reverse;
+}
+
+.article-image {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-img {
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.article-img:hover {
+  transform: scale(1.03);
+}
+
+.article-content {
+  flex: 1;
+  color: var(--accent, #fff);
+}
+
+.article-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.article-date {
+  color: var(--muted-gray, #aaa);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.article-description {
+  color: var(--text-gray, #ccc);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* Fullscreen viewer */
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.25s ease;
+  cursor: zoom-out;
+}
+
+.viewer-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  animation: zoomIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .article {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .article.reverse {
+    flex-direction: column;
+  }
+  .article-img {
+    max-height: 350px;
+  }
+}
+</style>

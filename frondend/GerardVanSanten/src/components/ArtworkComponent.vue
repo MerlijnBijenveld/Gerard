@@ -1,11 +1,11 @@
 <script setup>
 import { ref, computed, onBeforeUnmount } from 'vue'
-import { useLan } from './Languages/LanguagesManager'
+import { useLan } from '../Languages/LanguagesManager'
 
 const { t } = useLan()
 
 const props = defineProps({
-  images: { type: Array, required: true }, // [{ src, title, year, medium, description }]
+  images: { type: Array, required: true },
   startIndex: { type: Number, default: 0 },
 })
 

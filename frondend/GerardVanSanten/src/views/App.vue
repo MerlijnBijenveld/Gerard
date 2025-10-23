@@ -1,19 +1,16 @@
 <script setup>
-import NavBar from './NavBar.vue'
-import Footer from './FooterApp.vue'
-import ArtworkComponent from './ArtworkComponent.vue'
-import portrait from './assets/gerard.jpg'
+import ArtworkComponent from '../components/ArtworkComponent.vue'
+import portrait from '../assets/gerard.jpg'
 import { onMounted, computed } from 'vue'
-import { useLan } from './Languages/LanguagesManager'
-import translations from './Languages/Languages.json' // lees json direct
+import { useLan } from '../Languages/LanguagesManager'
+import translations from '../Languages/Languages.json'
 
-const { t, locale } = useLan()
+const { t, locale } = useLan() // t() available for template
 
-/* protections */
+// Prevent dragging/copying hero image
 onMounted(() => {
   document.addEventListener('dragstart', (e) => {
-    const el = e.target
-    if (el && el.closest && el.closest('.hero-figure')) e.preventDefault()
+    if (e.target.closest('.hero-figure')) e.preventDefault()
   })
 })
 
@@ -21,34 +18,34 @@ function sendMail() {
   window.location.href = 'mailto:someone@example.com'
 }
 
+// Import all artwork images dynamically
 const assets = import.meta.glob('/src/assets/Paintings/*.{jpg,jpeg,png,webp}', { eager: true })
 
-function resolveSrcFromJson(pathSegment) {
-  if (!pathSegment) return null
-  const key = Object.keys(assets).find((k) => k.endsWith(pathSegment))
-  return key ? assets[key].default || assets[key] : null
+function resolveSrcFromJson(filename) {
+  if (!filename) return null
+  const fileKey = Object.keys(assets).find((k) => k.endsWith(filename))
+  return fileKey ? assets[fileKey].default || assets[fileKey] : null
 }
 
+// Computed artworks list from JSON (localized)
 const artworks = computed(() => {
   const node = translations[locale.value]?.artworks || {}
   return Object.keys(node)
     .map((k) => {
       const meta = node[k]
       return {
-        src: resolveSrcFromJson(meta.src), // url of null
-        title: t(`artworks.${k}.title`),
+        src: resolveSrcFromJson(meta.src),
+        title: meta.title || '',
         year: meta.year || '',
         medium: meta.medium || '',
-        description: t(`artworks.${k}.desc`),
+        description: meta.description || '',
       }
     })
-    .filter((a) => a.src) // filter eventuele ontbrekende assets
+    .filter((a) => a.src)
 })
 </script>
 
 <template>
-  <NavBar />
-
   <main class="app-main">
     <section class="hero" aria-roledescription="hero">
       <div
@@ -70,9 +67,7 @@ const artworks = computed(() => {
 
       <div class="hero-content">
         <h1 class="title">{{ t('hero.title') }}</h1>
-        <p class="subtitle">
-          {{ t('hero.subtitle') }}
-        </p>
+        <p class="subtitle">{{ t('hero.subtitle') }}</p>
 
         <div class="hero-actions">
           <a class="btn" href="#works">{{ t('hero.viewWorks') }}</a>
@@ -90,16 +85,15 @@ const artworks = computed(() => {
       </div>
     </section>
   </main>
-
-  <Footer />
 </template>
+
 <style scoped>
 .app-main {
   max-width: 1100px;
   margin: 2rem auto;
   padding: 0 1rem;
   color: var(--accent);
-  user-select: none; /* discourage copy/select */
+  user-select: none;
 }
 .gallery {
   display: flex;
@@ -116,7 +110,6 @@ const artworks = computed(() => {
   text-align: center;
 }
 
-/* circular portrait placed center-left on wide screens, stacked on small screens */
 .hero-figure {
   width: 360px;
   height: 360px;
@@ -131,7 +124,6 @@ const artworks = computed(() => {
   flex: 0 0 360px;
 }
 
-/* invisible overlay that captures pointer events to make right-click/save harder */
 .image-protector {
   position: absolute;
   inset: 0;
@@ -139,7 +131,6 @@ const artworks = computed(() => {
   pointer-events: all;
 }
 
-/* text block */
 .hero-content {
   max-width: 600px;
 }
@@ -167,7 +158,6 @@ const artworks = computed(() => {
   line-height: 1.5;
 }
 
-/* actions */
 .hero-actions {
   display: flex;
   gap: 0.75rem;
@@ -198,7 +188,6 @@ const artworks = computed(() => {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* content section */
 .content-section {
   margin-top: 3rem;
   padding: 2rem;
@@ -207,7 +196,6 @@ const artworks = computed(() => {
   color: var(--accent);
 }
 
-/* responsive */
 @media (max-width: 880px) {
   .hero {
     padding: 2.5rem 1rem;

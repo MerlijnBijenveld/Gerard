@@ -1,10 +1,16 @@
 {
   "locales": ["en", "nl"],
   "en": {
-    "nav": { "home": "Home", "about": "About", "contact": "Contact", "search": "Search..." },
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact",
+      "search": "Search...",
+      "media": "Media"
+    },
     "hero": {
       "title": "Gerard Van Santen",
-      "subtitle": "Artist in Hilverus",
+      "subtitle": "Artist in Hilversum",
       "viewWorks": "View Works",
       "contact": "Contact"
     },
@@ -13,21 +19,86 @@
       "intro": "My recent works"
     },
     "artworks": {
-      "1": { "src": "maan.jpg", "title": "Artwork 1", "desc": "Short description of artwork 1." },
-      "2": {
-        "src": "Scapandre.jpg",
-        "title": "Artwork 2",
-        "desc": "Short description of artwork 2."
+      "1": {
+        "src": "maan.jpg",
+        "title": "Abstract Moon",
+        "year": "2023",
+        "medium": "Oil on Canvas",
+        "description": "A surreal composition exploring lunar textures and emotion."
       },
-      "3": { "src": "kroon.jpg", "title": "Artwork 3", "desc": "Short description of artwork 3." }
+      "2": {
+        "src": "kroon.jpg",
+        "title": "Golden Crown",
+        "year": "2022",
+        "medium": "Acrylic",
+        "description": "An abstract depiction of resilience and regality."
+      },
+      "3": {
+        "src": "Scapandre.jpg",
+        "title": "Diver in Light",
+        "year": "2024",
+        "medium": "Oil on Panel",
+        "description": "Realistic underwater portrait emphasizing movement and reflection."
+      },
+      "4": {
+        "src": "portrait.jpg",
+        "title": "Portrait Study",
+        "year": "2025",
+        "medium": "Charcoal",
+        "description": "Detailed study of light, form, and presence."
+      }
     },
-    "footer": { "copyright": "© {year} Gerard Van Santen", "madeBy": "made by Merlijn Bijenveld" }
+    "artCategories": {
+      "abstract": "Abstract",
+      "realism": "Realism"
+    },
+    "articles": {
+      "1": {
+        "title": "The Silent Canvas",
+        "date": "2025-01-12",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
+      },
+      "2": {
+        "title": "Shadows and Light",
+        "date": "2025-02-05",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus."
+      },
+      "3": {
+        "title": "Reflections of Time",
+        "date": "2025-03-20",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor."
+      },
+      "4": {
+        "title": "Echoes of Color",
+        "date": "2025-04-14",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ullamcorper ultricies nisi."
+      },
+      "5": {
+        "title": "Dreams in Motion",
+        "date": "2025-05-09",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum semper nisi."
+      }
+    },
+    "footer": {
+      "copyright": "© {year} Gerard Van Santen",
+      "madeBy": "made by Merlijn Bijenveld"
+    },
+    "about": {
+      "title": "Gerard Van Santen",
+      "paragraphs": ["Gerard Van Santen about"]
+    }
   },
   "nl": {
-    "nav": { "home": "Home", "about": "Over", "contact": "Contact", "search": "Zoeken..." },
+    "nav": {
+      "home": "Home",
+      "about": "Over",
+      "contact": "Contact",
+      "search": "Zoeken...",
+      "media": "Media"
+    },
     "hero": {
       "title": "Gerard Van Santen",
-      "subtitle": "Artiest uit hilversum",
+      "subtitle": "Artiest uit Hilversum",
       "viewWorks": "Bekijk werken",
       "contact": "Contact"
     },
@@ -36,13 +107,73 @@
       "intro": "Mijn recente werken"
     },
     "artworks": {
-      "1": { "src": "maan.jpg", "title": "Werk 1", "desc": "Korte beschrijving van werk 1." },
-      "2": { "src": "Scapandre.jpg", "title": "Werk 2", "desc": "Korte beschrijving van werk 2." },
-      "3": { "src": "kroon.jpg", "title": "Werk 3", "desc": "Korte beschrijving van werk 3." }
+      "1": {
+        "src": "maan.jpg",
+        "title": "Abstracte Maan",
+        "year": "2023",
+        "medium": "Olie op Canvas",
+        "description": "Een surrealistische compositie die maantexturen en emotie verkent."
+      },
+      "2": {
+        "src": "kroon.jpg",
+        "title": "Gouden Kroon",
+        "year": "2022",
+        "medium": "Acryl",
+        "description": "Een abstracte weergave van veerkracht en koninklijkheid."
+      },
+      "3": {
+        "src": "Scapandre.jpg",
+        "title": "Duiker in Licht",
+        "year": "2024",
+        "medium": "Olie op Paneel",
+        "description": "Realistisch onderwaterportret met nadruk op beweging en reflectie."
+      },
+      "4": {
+        "src": "portrait.jpg",
+        "title": "Portretstudie",
+        "year": "2025",
+        "medium": "Houtskool",
+        "description": "Gedetailleerde studie van licht, vorm en aanwezigheid."
+      }
+    },
+    "artCategories": {
+      "abstract": "Abstract",
+      "realism": "Realistisch"
+    },
+    "articles": {
+      "1": {
+        "title": "Het Stille Doek",
+        "date": "2025-01-12",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
+      },
+      "2": {
+        "title": "Schaduw en Licht",
+        "date": "2025-02-05",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus."
+      },
+      "3": {
+        "title": "Reflecties van de Tijd",
+        "date": "2025-03-20",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor."
+      },
+      "4": {
+        "title": "Echo's van Kleur",
+        "date": "2025-04-14",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ullamcorper ultricies nisi."
+      },
+      "5": {
+        "title": "Dromen in Beweging",
+        "date": "2025-05-09",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum semper nisi."
+      }
     },
     "footer": {
       "copyright": "© {year} Gerard Van Santen",
       "madeBy": "gemaakt door Merlijn Bijenveld"
+    },
+    "about": {
+      "title": "Gerard Van Santen",
+      "paragraphs": ["Gerard Van Santen over"]
     }
   }
 }

@@ -1,7 +1,7 @@
 <script setup>
-import './root.css'
+import '../root.css'
 import { ref, computed } from 'vue'
-import { useLan } from './Languages/LanguagesManager'
+import { useLan } from '../Languages/LanguagesManager'
 
 const { t, locale, setLocale, locales } = useLan()
 const search = ref('')
@@ -21,9 +21,10 @@ const flagMap = {
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-content">
       <div class="nav-left">
-        <a class="nav-item" href="#">{{ t('nav.home') }}</a>
-        <a class="nav-item" href="#about">{{ t('nav.about') }}</a>
-        <a class="nav-item" href="#contact">{{ t('nav.contact') }}</a>
+        <router-link class="nav-item" to="/">{{ t('nav.home') }}</router-link>
+        <router-link class="nav-item" to="/about">{{ t('nav.about') }}</router-link>
+        <router-link class="nav-item" to="/media">{{ t('nav.contact') }}</router-link>
+        <router-link class="nav-item" to="/media">{{ t('nav.media') }}</router-link>
       </div>
 
       <div class="nav-right">
