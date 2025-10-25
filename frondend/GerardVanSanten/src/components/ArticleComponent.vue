@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import ArtworkComponent from './ArtworkComponent.vue'
 
 defineProps({
   articles: {
@@ -7,17 +7,6 @@ defineProps({
     default: () => [],
   },
 })
-
-// modal viewer for image zoom
-const selectedImage = ref(null)
-function openImage(src) {
-  selectedImage.value = src
-  document.body.style.overflow = 'hidden'
-}
-function closeImage() {
-  selectedImage.value = null
-  document.body.style.overflow = ''
-}
 </script>
 
 <template>
@@ -28,27 +17,14 @@ function closeImage() {
       :class="['article', i % 2 ? 'reverse' : '']"
     >
       <div class="article-image" v-if="a.image">
-        <img
-          class="article-img"
-          :src="a.image"
-          :alt="a.title"
-          @click="openImage(a.image)"
-          @contextmenu.prevent
-          @dragstart.prevent
-        />
+        <ArtworkComponent :images="a.image" :is-article="true" :items="1" />
       </div>
-
       <div class="article-content">
         <h3 class="article-title">{{ a.title }}</h3>
         <div class="article-date">{{ a.date }}</div>
         <p class="article-description">{{ a.description }}</p>
       </div>
     </article>
-
-    <!-- modal image viewer -->
-    <div v-if="selectedImage" class="image-viewer" @click="closeImage">
-      <img :src="selectedImage" class="viewer-img" alt="Expanded view" />
-    </div>
   </section>
 </template>
 
@@ -86,6 +62,7 @@ function closeImage() {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
 }
 
 .article-img {
@@ -97,6 +74,8 @@ function closeImage() {
     box-shadow 0.3s ease;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  border-radius: 12px;
 }
 
 .article-img:hover {
@@ -146,6 +125,57 @@ function closeImage() {
   object-fit: contain;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
   animation: zoomIn 0.25s ease;
+}
+
+/* Arrows inside fullscreen viewer */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2100;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.nav-btn.left {
+  left: 20px;
+}
+.nav-btn.right {
+  right: 20px;
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Bullets under the image */
+.viewer-bullets {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2100;
+}
+.viewer-bullets .bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.viewer-bullets .bullet.active {
+  background: #fff;
 }
 
 @keyframes fadeIn {

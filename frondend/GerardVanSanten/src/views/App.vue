@@ -43,6 +43,7 @@ const artworks = computed(() => {
     })
     .filter((a) => a.src)
 })
+console.log('Artworks loaded:', artworks.value)
 </script>
 
 <template>
@@ -81,7 +82,7 @@ const artworks = computed(() => {
       <p>{{ t('featured.intro') }}</p>
 
       <div class="gallery">
-        <ArtworkComponent :images="artworks" />
+        <ArtworkComponent :images="artworks" items="3" />
       </div>
     </section>
   </main>
