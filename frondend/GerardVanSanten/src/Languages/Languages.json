@@ -6,7 +6,8 @@
       "about": "About",
       "contact": "Contact",
       "search": "Search...",
-      "media": "Media"
+      "media": "Media",
+      "artworks": "Artworks"
     },
     "hero": {
       "title": "Gerard Van Santen",
@@ -24,28 +25,32 @@
         "title": "Abstract Moon",
         "year": "2023",
         "medium": "Oil on Canvas",
-        "description": "A surreal composition exploring lunar textures and emotion."
+        "description": "A surreal composition exploring lunar textures and emotion.",
+        "type": "abstract"
       },
       "2": {
         "src": "kroon.jpg",
         "title": "Golden Crown",
         "year": "2022",
         "medium": "Acrylic",
-        "description": "An abstract depiction of resilience and regality."
+        "description": "An abstract depiction of resilience and regality.",
+        "type": "abstract"
       },
       "3": {
         "src": "Scapandre.jpg",
         "title": "Diver in Light",
         "year": "2024",
         "medium": "Oil on Panel",
-        "description": "Realistic underwater portrait emphasizing movement and reflection."
+        "description": "Realistic underwater portrait emphasizing movement and reflection.",
+        "type": "realism"
       },
       "4": {
         "src": "portrait.jpg",
         "title": "Portrait Study",
         "year": "2025",
         "medium": "Charcoal",
-        "description": "Detailed study of light, form, and presence."
+        "description": "Detailed study of light, form, and presence.",
+        "type": "realism"
       }
     },
     "artCategories": {
@@ -85,7 +90,25 @@
     },
     "about": {
       "title": "Gerard Van Santen",
-      "paragraphs": ["Gerard Van Santen about"]
+      "paragraphs": [
+        "Gerard van Santen graduated in Monumental Design, Graphic Techniques (etching, lithography, woodcut, etc.), Portrait and Figure Drawing, and Oil Painting at the Utrecht School of the Arts.",
+        "During his studies and early career, he taught drawing at the Centraal Museum Utrecht, and later gave pro bono lessons in all classical graphic techniques in print studios and workshops.",
+        "He was also a strong advocate for the development and acceptance of new digital media and regularly gave demonstrations and lectures at institutions such as Utrecht University and Hogeschool Holland, exploring the seemingly unlimited possibilities of these emerging techniques — at a time when they were not yet widely accepted.",
+        "During his stay in the United States, Gerard van Santen met Andy Warhol and later worked for a period at The Factory in New York.",
+        "In the same period, he collaborated with Jean Michel Basquiat, and exhibited his work at Styria Studios in New York with the group around Robert Rauschenberg.",
+        "Later, he worked for several years as an assistant in the studio of British sculptor and printmaker Barry J. Flanagan.",
+        "These encounters had a profound influence on the development of his work.",
+        "Gerard van Santen is also an advisor on new media for L.O.G.A. (National Council of Graphic Studios in the Netherlands). He is an active member of the 'Genootschap Kunstliefde' in Utrecht and has served for several years on the Advisory Committee for Public Art Applications for the municipality of Hilversum.",
+        "In 2006, Gerard van Santen received the 'Network Trophy' for his life’s work — honoring both his achievements as a graphic artist and his dedication to the development and acceptance of new media.",
+        "Biennales (selection): In recent years, he has represented the Netherlands at the Biennale of Taipei (Taiwan), the Graphic Biennale of Krakow (Poland), the Biennale of Varna (Bulgaria), the Prix Ars Electronica (Linz, Austria), and the Mini Print Biennale (Laahti, Finland).",
+        "Exhibitions (selection): Centraal Museum Utrecht, Singer Museum Laren, G.S.A. Hilversum, Cultural Centre De Vaart Hilversum, Town Hall of Dudok Hilversum, National Aviation Museum Soesterberg, The Kruithuis Den Bosch, Arti et Amicitiae Amsterdam, Printshop Amsterdam, Galerie 2001 Amsterdam, Galerie Petit Amsterdam, Art Hotel Amsterdam, Kasteel Groeneveld Baarn, Slot Zeist, Cultural Centre Corrosia Almere, Graphic Studio Arnhem, Genootschap Kunstliefde Utrecht, Vestingmuseum Naarden, Museum of Contemporary Arts Madras India, The Factory New York U.S.A., Styria Galleries New York U.S.A., Graphic Museum Laahti Finland, National Gallery Sofia Bulgaria, Museum of Communication Nuremberg Germany."
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Get in touch with Gerard Van Santen",
+      "intro": "For inquiries, collaborations, or exhibitions, feel free to reach out through the channels below.",
+      "email": "Send Email"
     }
   },
   "nl": {
@@ -94,7 +117,8 @@
       "about": "Over",
       "contact": "Contact",
       "search": "Zoeken...",
-      "media": "Media"
+      "media": "Media",
+      "artworks": "Kunstwerken"
     },
     "hero": {
       "title": "Gerard Van Santen",
@@ -112,28 +136,32 @@
         "title": "Abstracte Maan",
         "year": "2023",
         "medium": "Olie op Canvas",
-        "description": "Een surrealistische compositie die maantexturen en emotie verkent."
+        "description": "Een surrealistische compositie die maantexturen en emotie verkent.",
+        "type": "abstract"
       },
       "2": {
         "src": "kroon.jpg",
         "title": "Gouden Kroon",
         "year": "2022",
         "medium": "Acryl",
-        "description": "Een abstracte weergave van veerkracht en koninklijkheid."
+        "description": "Een abstracte weergave van veerkracht en koninklijkheid.",
+        "type": "abstract"
       },
       "3": {
         "src": "Scapandre.jpg",
         "title": "Duiker in Licht",
         "year": "2024",
         "medium": "Olie op Paneel",
-        "description": "Realistisch onderwaterportret met nadruk op beweging en reflectie."
+        "description": "Realistisch onderwaterportret met nadruk op beweging en reflectie.",
+        "type": "realism"
       },
       "4": {
         "src": "portrait.jpg",
         "title": "Portretstudie",
         "year": "2025",
         "medium": "Houtskool",
-        "description": "Gedetailleerde studie van licht, vorm en aanwezigheid."
+        "description": "Gedetailleerde studie van licht, vorm en aanwezigheid.",
+        "type": "realism"
       }
     },
     "artCategories": {
@@ -173,7 +201,25 @@
     },
     "about": {
       "title": "Gerard Van Santen",
-      "paragraphs": ["Gerard Van Santen over"]
+      "paragraphs": [
+        "Gerard van Santen studeerde af in de studierichtingen monumentale vormgeving, grafische technieken (ets, steendruk, houtsnede etc.), portret-, modeltekenen en olieverf aan de Hogeschool voor de Kunsten Utrecht.",
+        "Hij gaf tijdens zijn studie en aan het begin van zijn loopbaan tekenles in het Centraal Museum Utrecht, en later ‘pro bono’ les in alle klassieke grafische technieken in grafische ateliers en werkplaatsen.",
+        "Daarnaast zette hij zich energiek in voor de ontwikkeling en acceptatie van nieuwe digitale media en gaf regelmatig demonstraties en lezingen o.a. op de Rijksuniversiteit Utrecht en de Hogeschool Holland over de schijnbaar onbegrensde mogelijkheden van deze technieken, in een periode waarin deze nog niet breed geaccepteerd waren.",
+        "Gerard van Santen maakte tijdens zijn verblijf in de Verenigde Staten kennis met Andy Warhol en werkte vervolgens enige tijd in The Factory in New York.",
+        "In diezelfde periode werkte hij samen met Jean Michel Basquiat, en exposeerde hij zijn werk in de Styria Studio’s in New York met de groep rond Robert Rauschenberg.",
+        "Daarna werkte hij lange tijd als assistent in het atelier van de Britse beeldhouwer en graficus Barry J. Flanagan.",
+        "Deze ontmoetingen zijn van grote invloed geweest op de ontwikkeling van zijn werk.",
+        "Gerard van Santen is o.a. adviseur m.b.t. nieuwe media voor het L.O.G.A. (landelijk overleg grafische ateliers Nederland), werkend lid van het Genootschap Kunstliefde Utrecht, en tevens lid geweest van de adviescommissie voor kunsttoepassingen in de openbare ruimte van de gemeente Hilversum.",
+        "In 2006 ontving Gerard van Santen de ‘Netwerk Trofee’ voor zijn gehele oeuvre, zowel voor zijn verdiensten als graficus als voor zijn inzet voor de ontwikkeling en acceptatie van nieuwe media.",
+        "Biennales (selectie): In het recente verleden vertegenwoordigde hij Nederland op de Biennale van Taipei (Taiwan), de Grafiekbiennale van Krakau (Polen), de Biennale van Varna (Bulgarije), de Prix Ars Electronica (Linz, Oostenrijk) en de Miniprinten Biennale (Laahti, Finland).",
+        "Exposities (selectie): Centraal Museum Utrecht, Singer Museum Laren, G.S.A. Hilversum, Cultureel Centrum De Vaart Hilversum, Raadhuis van Dudok Hilversum, Rijksluchtvaartmuseum Soesterberg, Het Kruithuis Den Bosch, Arti et Amicitiae Amsterdam, Printshop Amsterdam, Galerie 2001 Amsterdam, Galerie Petit Amsterdam, Art Hotel Amsterdam, Kasteel Groeneveld Baarn, Slot Zeist, Cultureel Centrum Corrosia Almere, Grafisch Atelier Arnhem, Genootschap Kunstliefde Utrecht, Vestingmuseum Naarden, Museum of Contemporary Arts Madras India, The Factory New York U.S.A., Styria Galeries New York U.S.A., Grafiekmuseum Laahti Finland, National Gallery Sofia Bulgarije, Museum voor Communicatie Neurenberg B.R.D."
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Neem contact op met Gerard Van Santen",
+      "intro": "Voor vragen, samenwerkingen of tentoonstellingen kunt u contact opnemen via onderstaande kanalen.",
+      "email": "Verstuur e-mail"
     }
   }
 }

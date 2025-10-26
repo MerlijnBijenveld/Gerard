@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/App.vue'
 import AboutView from '../views/AboutPage.vue'
 import MediaView from '../views/MediaPage.vue'
+import ContactPage from '@/views/ContactPage.vue'
+import ArtworkShowcase from '@/views/ArtworkShowcase.vue'
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/media',
     name: 'media',
     component: MediaView,
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactPage,
+  },
+  {
+    path: '/artworks',
+    name: 'artworks',
+    component: ArtworkShowcase,
   },
 ]
 

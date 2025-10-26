@@ -55,6 +55,7 @@ function navigateAndClose(path) {
         <router-link class="nav-item" to="/about">{{ t('nav.about') }}</router-link>
         <router-link class="nav-item" to="/media">{{ t('nav.media') }}</router-link>
         <router-link class="nav-item" to="/contact">{{ t('nav.contact') }}</router-link>
+        <router-link class="nav-item" to="/artworks">{{ t('nav.artworks') }}</router-link>
       </div>
 
       <!-- right (search + lang) -->

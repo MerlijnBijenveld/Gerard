@@ -7,6 +7,16 @@ const { t } = useLan()
 // Make them computed so they re-render when language changes
 const aboutTitle = computed(() => t('about.title') || 'About')
 const paragraphs = computed(() => t('about.paragraphs') || [])
+
+function formatList(text) {
+  return text
+    .split(',')
+    .map((t) => t.trim())
+    .filter(
+      (t) =>
+        t && !t.toLowerCase().startsWith('biennales') && !t.toLowerCase().startsWith('exposities'),
+    )
+}
 </script>
 
 <template>
@@ -29,9 +39,30 @@ const paragraphs = computed(() => t('about.paragraphs') || [])
       </transition>
 
       <transition-group name="fade-up" tag="div">
-        <p v-for="(p, i) in paragraphs" :key="i" class="about-text">
-          {{ p }}
-        </p>
+        <!-- Detecteer lijsten aan het begin van een paragraaf -->
+        <template v-for="(p, i) in paragraphs" :key="i">
+          <ul
+            v-if="
+              p.trim().startsWith('Biennales') ||
+              p.trim().startsWith('Exposities') ||
+              p.trim().startsWith('Exhibitions')
+            "
+            class="about-list"
+          >
+            <li v-for="line in formatList(p)" :key="line">{{ line }}</li>
+          </ul>
+          <p
+            v-else
+            class="about-text"
+            :class="{
+              'italic text-gray-600': i < 2,
+              'about-list-intro':
+                p.toLowerCase().includes('biennales') || p.toLowerCase().includes('exposities'),
+            }"
+          >
+            {{ p }}
+          </p>
+        </template>
       </transition-group>
     </section>
   </main>

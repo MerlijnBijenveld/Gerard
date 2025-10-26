@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onBeforeUnmount, watch } from 'vue'
 import { useLan } from '../Languages/LanguagesManager'
+import ButtonComponent from './ButtonComponent.vue'
 
 const { t } = useLan()
 
@@ -12,15 +13,19 @@ const props = defineProps({
 })
 
 const currentIndex = ref(Math.max(0, Math.min(props.startIndex, props.images.length - 1)))
+// displayIndex drives the non-modal thumbnail order so modal navigation doesn't move thumbnails
+const displayIndex = ref(currentIndex.value)
 const isOpen = ref(false)
 
 watch(
   () => props.images.length,
   (len) => {
     if (currentIndex.value >= len) currentIndex.value = Math.max(0, len - 1)
+    if (displayIndex.value >= len) displayIndex.value = Math.max(0, len - 1)
   },
 )
 
+// Make item handling robust for both "string" and "{ src: ... }" image entries
 const item = computed(() => {
   const raw = props.images[currentIndex.value]
   if (!raw) return null
@@ -35,6 +40,28 @@ const bgStyleFull = computed(() => ({
   backgroundColor: 'rgba(0,0,0,0)',
 }))
 
+// Visible thumbnails based on props.items (works with array of strings or objects with .src)
+// Uses displayIndex so modal navigation won't reorder thumbnails in non-open mode.
+const visibleThumbnails = computed(() => {
+  const len = props.images.length
+  if (!len) return []
+  const count = Math.max(1, Math.floor(props.items) || 1)
+  const centerIndex = displayIndex.value
+  // if only one requested, show only current (based on displayIndex)
+  if (count === 1) {
+    const raw = props.images[centerIndex]
+    return [{ src: raw?.src || raw, index: centerIndex }]
+  }
+  const half = Math.floor(count / 2)
+  const out = []
+  for (let i = 0; i < Math.min(count, len); i++) {
+    const idx = (centerIndex - half + i + len) % len
+    const raw = props.images[idx]
+    out.push({ src: raw?.src || raw, index: idx })
+  }
+  return out
+})
+
 function open() {
   isOpen.value = true
   document.body.style.overflow = 'hidden'
@@ -43,20 +70,32 @@ function open() {
 function openAt(index) {
   if (index == null || index < 0 || index >= props.images.length) return
   currentIndex.value = index
+  // Do NOT change displayIndex here — keep thumbnail order stable while modal is open
   open()
+}
+// used by non-modal bullets to change selected thumbnail (keeps displayIndex in sync)
+function selectIndex(idx) {
+  if (idx == null || idx < 0 || idx >= props.images.length) return
+  currentIndex.value = idx
+  if (!isOpen.value) displayIndex.value = idx
 }
 function close() {
   isOpen.value = false
   document.body.style.overflow = ''
   window.removeEventListener('keydown', onKey)
+  // optionally sync displayIndex to currentIndex when closing so thumbnails reflect last viewed
+  // comment/uncomment next line depending on desired behaviour
+  // displayIndex.value = currentIndex.value
 }
 function prev() {
   if (!props.images.length) return
   currentIndex.value = (currentIndex.value - 1 + props.images.length) % props.images.length
+  displayIndex.value = currentIndex.value
 }
 function next() {
   if (!props.images.length) return
   currentIndex.value = (currentIndex.value + 1) % props.images.length
+  displayIndex.value = currentIndex.value
 }
 function onKey(e) {
   if (!isOpen.value) return
@@ -68,112 +107,80 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', onKey)
   document.body.style.overflow = ''
 })
-
-const thumbStart = ref(0)
-const visibleThumbs = computed(() => {
-  if (props.items >= props.images.length) {
-    return props.images
-  }
-  return props.images.slice(thumbStart.value, thumbStart.value + props.items)
-})
-function thumbPrev() {
-  if (thumbStart.value > 0) thumbStart.value--
-}
-function thumbNext() {
-  if (thumbStart.value + props.items < props.images.length) thumbStart.value++
-}
 </script>
 
 <template>
   <!-- Thumbnails -->
   <div class="thumbnails">
-    <div v-if="props.isArticle && props.images.length" class="article-thumb-container">
+    <div v-if="props.images.length" class="article-thumb-container">
       <div class="article-thumb-wrap">
-        <button
-          v-if="props.images.length > 1"
-          class="article-nav left"
-          @click.stop.prevent="prev()"
-          aria-label="Previous"
-        >
-          ‹
-        </button>
-        <div
-          class="artwork-thumb"
-          role="button"
-          aria-label="Article image"
-          @click="openAt(currentIndex)"
-          tabindex="0"
-        >
-          <div
-            class="thumb-image"
-            :style="{
-              backgroundImage: `url(${props.images[currentIndex]})`,
-              backgroundSize: 'contain',
-            }"
-          >
-            <div class="thumb-overlay"></div>
-          </div>
-        </div>
-
-        <button
-          v-if="props.images.length > 1"
-          class="article-nav right"
-          @click.stop.prevent="next()"
-          aria-label="Next"
-        >
-          ›
-        </button>
-      </div>
-    </div>
-    <div v-if="props.images.length > 1" class="article-bullets">
-      <span
-        v-for="(img, idx) in props.images"
-        :key="idx"
-        class="bullet"
-        :class="{ active: idx === currentIndex }"
-        @click.stop="currentIndex = idx"
-      ></span>
-    </div>
-    <template v-else>
-      <div class="thumbs-flex">
-        <button v-if="props.items < props.images.length" class="thumb-nav left" @click="thumbPrev">
-          ‹
-        </button>
-
-        <div class="thumbs-list">
-          <div
-            v-for="(img, idx) in visibleThumbs"
-            :key="thumbStart + idx"
-            class="artwork-thumb"
-            role="button"
-            :aria-label="img?.title || 'Artwork'"
-            @click="openAt(thumbStart + idx)"
-            tabindex="0"
-          >
+        <ButtonComponent
+          v-if="visibleThumbnails.length !== props.images.length"
+          direction="left"
+          :images="props.images"
+          :width="260"
+          :prev="prev"
+          :next="next"
+        />
+        <div class="thumbs-flex" aria-hidden="false">
+          <div class="thumbs-list">
             <div
-              class="thumb-image"
-              :style="{ backgroundImage: `url(${props.isArticle ? img : img.src})` }"
+              v-for="thumb in visibleThumbnails"
+              :key="thumb.index"
+              class="artwork-thumb"
+              role="button"
+              :aria-label="`Open image ${thumb.index + 1}`"
+              @click="openAt(thumb.index)"
+              tabindex="0"
             >
-              <div class="thumb-overlay"></div>
+              <div
+                class="thumb-image"
+                :style="{
+                  backgroundImage: `url(${thumb.src})`,
+                  backgroundSize: 'contain',
+                }"
+              >
+                <div class="thumb-overlay"></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <button v-if="props.items < props.images.length" class="thumb-nav right" @click="thumbNext">
-          ›
-        </button>
+        <ButtonComponent
+          v-if="visibleThumbnails.length !== props.images.length"
+          direction="right"
+          :images="props.images"
+          :width="260"
+          :prev="prev"
+          :next="next"
+        />
       </div>
-
-      <div v-if="props.items < props.images.length" class="thumb-bullets">
+    </div>
+    <div class="row-under-image" v-if="visibleThumbnails.length !== props.images.length">
+      <ButtonComponent
+        direction="left"
+        :images="props.images"
+        :width="260"
+        :prev="prev"
+        :next="next"
+      />
+      <div v-if="props.images.length > 1" class="article-bullets">
         <span
           v-for="(img, idx) in props.images"
           :key="idx"
           class="bullet"
-          :class="{ active: idx >= thumbStart && idx < thumbStart + props.items }"
-          @click="thumbStart = idx"
+          :class="{ active: idx === currentIndex }"
+          @click.stop="selectIndex(idx)"
         ></span>
       </div>
-    </template>
+      <ButtonComponent
+        direction="right"
+        :images="props.images"
+        :width="260"
+        :prev="prev"
+        :next="next"
+      />
+    </div>
   </div>
 
   <!-- Modal viewer -->
@@ -188,8 +195,13 @@ function thumbNext() {
     <button class="viewer-close" @click="close" :aria-label="t('nav.close') || 'Close'">✕</button>
 
     <div class="viewer-flex">
-      <button class="nav-btn" @click.stop="prev" aria-label="Previous">‹</button>
-
+      <ButtonComponent
+        direction="left"
+        :images="props.images"
+        :width="260"
+        :prev="prev"
+        :next="next"
+      />
       <div class="viewer-body">
         <div class="viewer-section">
           <div class="viewer-image" :style="bgStyleFull">
@@ -206,10 +218,14 @@ function thumbNext() {
           </div>
         </div>
       </div>
-
-      <button class="nav-btn" @click.stop="next" aria-label="Next">›</button>
+      <ButtonComponent
+        direction="right"
+        :images="props.images"
+        :width="260"
+        :prev="prev"
+        :next="next"
+      />
     </div>
-
     <div class="viewer-bullets">
       <span
         v-for="(img, idx) in props.images"
@@ -223,8 +239,24 @@ function thumbNext() {
 </template>
 
 <style scoped>
-/* FLEX EVERYWHERE */
-
+.row-under-image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 6px 0;
+}
+.row-under-image .article-nav {
+  display: none;
+  transform: none;
+  position: static;
+  margin: 0;
+}
+.article-thumb-wrap .article-nav {
+  display: flex;
+}
 .thumbnails {
   display: flex;
   flex-direction: column;
@@ -269,6 +301,7 @@ function thumbNext() {
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .thumb-nav {
@@ -336,16 +369,9 @@ function thumbNext() {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  position: absolute;
-  top: 50%;
   transform: translateY(-50%);
 }
-.article-nav.left {
-  left: -68px;
-}
-.article-nav.right {
-  right: -68px;
-}
+
 .article-nav:hover {
   background: rgba(0, 0, 0, 0.6);
 }
@@ -355,6 +381,7 @@ function thumbNext() {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: fixed;
   inset: 0;
   background: rgba(10, 10, 10, 0.9);
@@ -406,7 +433,6 @@ function thumbNext() {
   flex: 1 1 45%;
   padding: 40px;
   color: #fff;
-  background: rgba(18, 18, 18, 0.9);
 }
 
 .viewer-close {
@@ -446,16 +472,26 @@ function thumbNext() {
 .nav-btn:hover {
   background: rgba(255, 255, 255, 0.15);
 }
-
-@media (max-width: 980px) {
+@media (max-width: 1000px) {
   .viewer-section {
     flex-direction: column;
   }
+  .viewer-flex {
+    width: 80%;
+  }
+}
+@media (max-width: 600px) {
   .viewer-image {
     height: 50vh;
   }
   .viewer-text {
     padding: 24px;
+  }
+  .row-under-image .article-nav {
+    display: flex;
+  }
+  .article-thumb-wrap .article-nav {
+    display: none;
   }
 }
 </style>

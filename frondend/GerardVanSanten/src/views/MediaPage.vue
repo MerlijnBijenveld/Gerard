@@ -51,22 +51,6 @@ const articles = computed(() => {
 <template>
   <main class="page media">
     <h1>{{ title }}</h1>
-    <p>You can find me on various media platforms:</p>
-    <ul>
-      <li>
-        <a href="https://twitter.com/gerardvsanten" target="_blank" rel="noopener">Twitter</a>
-      </li>
-      <li>
-        <a href="https://www.instagram.com/gerardvsanten" target="_blank" rel="noopener"
-          >Instagram</a
-        >
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/gerardvsanten" target="_blank" rel="noopener"
-          >LinkedIn</a
-        >
-      </li>
-    </ul>
     <ArticleList :articles="articles" />
   </main>
 </template>

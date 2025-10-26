@@ -62,7 +62,9 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 100%;
+  max-width: 275px;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 .article-img {
@@ -199,7 +201,7 @@ defineProps({
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   .article {
     flex-direction: column;
     text-align: center;
