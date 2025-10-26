@@ -33,6 +33,16 @@ jobs:
         working-directory: frondend/gerardvansanten
         run: npm run build
 
+      - name: Show build output (debug)
+        run: |
+          echo "pwd: $(pwd)"
+          echo "list frondend folder:"
+          ls -la frondend
+          echo "list project folder:"
+          ls -la frondend/gerardvansanten
+          echo "list dist:"
+          ls -la frondend/gerardvansanten/dist || true
+
       - name: Upload built site (dist)
         uses: actions/upload-pages-artifact@v3
         with:
