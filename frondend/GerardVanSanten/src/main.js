@@ -1,4 +1,5 @@
 // ...existing code...
+
 import { createApp } from 'vue'
 import App from './RootComponent.vue'
 import router from './router'
