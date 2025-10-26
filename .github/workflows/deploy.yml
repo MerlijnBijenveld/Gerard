@@ -27,7 +27,7 @@ jobs:
 
        name: Install dependencies
         run: |
-          cd frondend/gerardvansanten
+          cd frondend/GerardVanSanten
           npm ci
 
       - name: Build site
@@ -40,13 +40,13 @@ jobs:
           pwd
           ls -la
           ls -la frondend || true
-          ls -la frondend/gerardvansanten || true
-          ls -la frondend/gerardvansanten/dist || true
+          ls -la frondend/GerardVanSanten || true
+          ls -la frondend/GerardVanSanten/dist || true
 
       - name: Upload built site (dist)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frondend/gerardvansanten/dist
+          path: frondend/GerardVanSanten/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
