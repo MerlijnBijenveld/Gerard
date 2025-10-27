@@ -27,26 +27,21 @@ jobs:
 
        name: Install dependencies
         run: |
-          cd frondend/gerardvansanten
           npm ci
 
       - name: Build site
         run: |
-          cd frondend/gerardvansanten
           npm run build
 
       - name: Show build output (debug)
         run: |
           pwd
           ls -la
-          ls -la frondend || true
-          ls -la frondend/gerardvansanten || true
-          ls -la frondend/gerardvansanten/dist || true
 
       - name: Upload built site (dist)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frondend/gerardvansanten/dist
+          path: /dist
 
       - name: Deploy to GitHub Pages
         id: deployment
