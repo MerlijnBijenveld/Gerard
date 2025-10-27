@@ -2,7 +2,7 @@
 
 import { createApp } from 'vue'
 import App from './RootComponent.vue'
-import router from './'
+import router from '.'
 
 const app = createApp(App)
 app.use(router)
