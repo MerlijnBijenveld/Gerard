@@ -1,8 +1,6 @@
-// ...existing code...
-
 import { createApp } from 'vue'
-import App from './src/RootComponent.vue'
-import router from './src/router'
+import App from '@/RootComponent.vue'
+import router from '@/router'
 
 const app = createApp(App)
 app.use(router)
