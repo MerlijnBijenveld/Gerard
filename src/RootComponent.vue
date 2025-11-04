@@ -10,7 +10,6 @@ import Footer from './components/FooterApp.vue'
 </template>
 
 <style scoped>
-/* small spacer so routed pages don't sit under the navbar */
 :host {
   display: block;
   padding-top: 8px;
