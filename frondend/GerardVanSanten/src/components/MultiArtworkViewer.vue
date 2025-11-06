@@ -59,7 +59,8 @@ const visibleThumbnails = computed(() => {
     const raw = props.images[idx]
     out.push({ src: raw?.src || raw, index: idx })
   }
-  return out
+  console.log(out)
+  return out.sort((a, b) => a.index - b.index)
 })
 
 function open() {
@@ -70,7 +71,6 @@ function open() {
 function openAt(index) {
   if (index == null || index < 0 || index >= props.images.length) return
   currentIndex.value = index
-  // Do NOT change displayIndex here — keep thumbnail order stable while modal is open
   open()
 }
 // used by non-modal bullets to change selected thumbnail (keeps displayIndex in sync)
