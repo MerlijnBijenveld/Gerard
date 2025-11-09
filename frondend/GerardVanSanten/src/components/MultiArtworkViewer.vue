@@ -59,7 +59,6 @@ const visibleThumbnails = computed(() => {
     const raw = props.images[idx]
     out.push({ src: raw?.src || raw, index: idx })
   }
-  console.log(out)
   return out.sort((a, b) => a.index - b.index)
 })
 
@@ -492,6 +491,12 @@ onBeforeUnmount(() => {
   }
   .article-thumb-wrap .article-nav {
     display: none;
+  }
+}
+@media (max-width: 880px) {
+  .thumbs-list {
+    flex-direction: column;
+    align-items: center;
   }
 }
 </style>
